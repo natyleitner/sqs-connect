@@ -4,7 +4,3 @@ cloud:
       static: us-east-2
       auto: false
     credentials:
-      access-key:
-      secret-key:
-    end-point:
-      uri: https://sqs.us-east-2.amazonaws.com/909789935004/RS-SQS-standard-queue
