@@ -65,6 +65,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>aws-sqs-connect-2</finalName>
 	</build>
 
 </project>

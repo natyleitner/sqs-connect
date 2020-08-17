@@ -20,9 +20,15 @@ public class ConnectApplication {
 
     @Value("${cloud.aws.end-point.uri}") private String endpoint;
 
+    @GetMapping(value = "/", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String sendWelcomeMessage() {
+        return "Go to send/{message} to send a message to the queue.";
+    }
+
     @GetMapping(value = "/send/{message}", produces = MediaType.TEXT_PLAIN_VALUE)
     public String sendMessageToQueue(@PathVariable String message)
     {
+        System.out.println(endpoint);
         try
         {
             queueMessagingTemplate.send(endpoint, MessageBuilder.withPayload(message).build());
