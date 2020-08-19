@@ -3,6 +3,7 @@ package com.sqs.and.connect.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amazonaws.services.sqs.model.AmazonSQSException;
 import com.sqs.and.connect.models.Product;
 import com.sqs.and.connect.repositories.ProductRepository;
 import org.json.JSONObject;
@@ -58,6 +59,8 @@ public class SqsController {
     @SqsListener("RS-SQS-standard-queue")
     public void loadMessageFromSQS(String message)
     {
+        int productCount = messages.size();
+
         try
         {
             JSONObject outputJson = new JSONObject(message);
@@ -72,6 +75,9 @@ public class SqsController {
         {
             messages.add("SQS: " + message);
         }
+
+        // Comment out try&catch for sending to DLQ
+        if (messages.size()!=productCount + 1) throw new AmazonSQSException(message);
     }
 
     /**
